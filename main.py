@@ -43,22 +43,38 @@ def attack(myNomi, enemyNomi, enemyMove):
     enemyNomi.calculateDamage(myMove, myNomi.attack)
     if enemyNomi.hp != 0:
       myNomi.calculateDamage(enemyMove, enemyNomi.attack)
+      print("Your Nomi HP: {}, Enemy Nomi HP: {}".format(myNomi.hp, enemyNomi.hp))
+    else:
+      print("Enemy Nomi has fallen!")
+      return False
 
   elif myMove.priority < enemyMove.priority:
     myNomi.calculateDamage(enemyMove, enemyNomi.attack)
-    if enemyNomi.hp != 0:
+    if myNomi.hp != 0:
       myNomi.calculateDamage(enemyMove, enemyNomi.attack)
+      print("Your Nomi HP: {}, Enemy Nomi HP: {}".format(myNomi.hp, enemyNomi.hp))
+    else:
+      print("Your Nomi has fallen!")
+      return False
   
   elif myMove.priority == enemyMove.priority:
     if myNomi.att_speed > enemyNomi.att_speed:
       enemyNomi.calculateDamage(myMove, myNomi.attack)
       if enemyNomi.hp != 0:
         myNomi.calculateDamage(enemyMove, enemyNomi.attack)
+        print("Your Nomi HP: {}, Enemy Nomi HP: {}".format(myNomi.hp, enemyNomi.hp))
+      else:
+        print("Enemy Nomi has fallen!")
+        return False
     
     elif myNomi.att_speed < enemyNomi.att_speed:
       myNomi.calculateDamage(enemyMove, enemyNomi.attack)
-      if enemyNomi.hp != 0:
+      if myNomi.hp != 0:
         myNomi.calculateDamage(enemyMove, enemyNomi.attack)
+        print("Your Nomi HP: {}, Enemy Nomi HP: {}".format(myNomi.hp, enemyNomi.hp))
+      else:
+        print("Your Nomi has fallen!")
+        return False
     
     #if both priority and speed are the same, throw a coin to determine who goes first
     
@@ -69,6 +85,21 @@ def attack(myNomi, enemyNomi, enemyMove):
         enemyNomi.calculateDamage(myMove, myNomi.attack)
         if enemyNomi.hp != 0:
           myNomi.calculateDamage(enemyMove, enemyNomi.attack)
+          print("Your Nomi HP: {}, Enemy Nomi HP: {}".format(myNomi.hp, enemyNomi.hp))
+        else:
+          print("Enemy Nomi has fallen!")
+          return False
       else:
         myNomi.calculateDamage(enemyMove, enemyNomi.attack)
+        if myNomi.hp != 0:
+          myNomi.calculateDamage(enemyMove, enemyNomi.attack)
+          print("Your Nomi HP: {}, Enemy Nomi HP: {}".format(myNomi.hp, enemyNomi.hp))
+        else:
+          print("Your Nomi has fallen!")
+          return False
+  return True
 
+
+#State the current HP values of each Nomi after this attack
+#If one of them (or both) has fallen to 0, state they have been defeated!
+#If one or both have been defeated, return false. If they are both still standind return True
